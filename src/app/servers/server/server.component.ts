@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
 import {routerNgProbeToken} from '@angular/router/src/router_module';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Data, Params, Router} from '@angular/router';
 import {p} from '@angular/core/src/render3';
 
 @Component({
@@ -20,6 +20,14 @@ export class ServerComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.route.data.subscribe(
+      (data: Data) => {
+        this.server = data['server'];
+      }
+    );
+
+    /*
     const id = +this.route.snapshot.params['id'];
     this.server = this.serversService.getServer(id);
     this.route.params.subscribe(
@@ -27,6 +35,7 @@ export class ServerComponent implements OnInit {
         this.server = this.serversService.getServer(+params['id']);
       }
     );
+    */
   }
 
   onEdit() {
